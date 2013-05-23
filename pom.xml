@@ -1,10 +1,40 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>org.blancas</groupId>
   <artifactId>tinypost</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0</version>
-  <name>Tiny Postscript</name>
+  <name>Tiny PostScript</name>
+  <description>A tiny PostScript interpreter</description>
+
+  <url>https://github.com/blancas/tinypost</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <developers>
+    <developer>
+      <name>Armando Blancas</name>
+      <email>abm221617@gmail.com</email>
+      <timezone>-8</timezone>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:blancas/tinypost.git</connection>
+    <developerConnection>scm:git:git@github.com:blancas/tinypost.git</developerConnection>
+    <url>git@github.com:blancas/tinypost.git</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License 1.0</name>
+      <url>http://opensource.org/licenses/eclipse-1.0.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <dependencies>
     <dependency>
@@ -16,7 +46,7 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
-      <version>1.4.0</version>
+      <version>1.5.1</version>
     </dependency>
     <dependency>
       <groupId>org.antlr</groupId>
