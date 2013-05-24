@@ -1,24 +1,12 @@
-# Tinypost
+## Tinypost
 
 A tiny PostScript interpreter.
 
-## Setup
+It uses an ANTLR3 lexer and a Java Exception class as a form of longjmp to get out of (possibly nested) loops. There is support for most of the core language but not for graphics.
 
-Leiningen:
+## To Do
 
-```clojure
-[org.blancas/tinypost "0.1.0"]
-```
-
-Maven:
-
-```xml
-<dependency>
-  <groupId>org.blancas</groupId>
-  <artifactId>tinypost</artifactId>
-  <version>0.1.0</version>
-</dependency>
-```
+* Make host program data available to ps code.
 
 ## License
 
