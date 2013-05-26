@@ -54,6 +54,11 @@
       <version>3.2</version>
     </dependency>
     <dependency>
+      <groupId>jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>0.9.94</version>
+    </dependency>
+    <dependency>
       <groupId>midje</groupId>
       <artifactId>midje</artifactId>
       <version>1.5.0</version>
