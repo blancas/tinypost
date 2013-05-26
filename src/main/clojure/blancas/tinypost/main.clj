@@ -20,7 +20,16 @@ Usage: ps <file>
   (try
     (if-let [file (first args)]
       (let [env (make-env)]
-        (reduce postscript env (token-seq (scanner file))))
+        (reduce postscript env (scanner file)))
       (println (:doc (meta (var -main)))))
+    (catch Throwable t
+      (.println *err* (.getMessage t)))))
+
+
+(defn run
+  "Runs the passed PostScript text. Returns the operand stack."
+  [ps]
+  (try
+    (:os (reduce postscript (make-env) (text-scanner ps)))
     (catch Throwable t
       (.println *err* (.getMessage t)))))

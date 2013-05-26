@@ -7,14 +7,8 @@
 ;; You must not remove this notice, or any other, from this software.
 
 (ns blancas.tinypost.scan
-  (:import [org.antlr.runtime ANTLRFileStream CharStream Token]
+  (:import [org.antlr.runtime ANTLRFileStream ANTLRStringStream CharStream Token]
            blancas.tinypost.Scanner))
-
-(defn scanner
-  "Returns a PostScript Scanner for the file."
-  [file]
-  (let [input (ANTLRFileStream. file)]
-    (Scanner. input)))
 
 (defn token-seq
   "Returns a lazy sequence of tokens from the given
@@ -25,6 +19,18 @@
       (if (= (.getType token) Scanner/WS)
         (recur scanner)
         (cons token (lazy-seq (token-seq scanner)))))))
+
+(defn scanner
+  "Returns a sequence of PostScript tokens from a text file."
+  [file]
+  (let [input (ANTLRFileStream. file)]
+    (token-seq (Scanner. input))))
+
+(defn text-scanner
+  "Returns a sequence of PostScript tokens from a string."
+  [cs]
+  (let [input (ANTLRStringStream. cs)]
+    (token-seq (Scanner. input))))
 
 ;;
 ;; Predicates for token types.
