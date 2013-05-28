@@ -32,12 +32,19 @@ Load the `main` namespace:
 (use 'blancas.tinypost.main)
 ```
 
-Use `runf` to run a ps file and get as result the operand stack.
+Use `runf` to run a ps file and get the resulting operand stack.
 
 ```Clojure
 (runf "src/main/resources/fact.ps")
 ;; 720
 ;; [3628800]
+```
+
+Use `run` to run ps code and get the resulting operand stack.
+
+```Clojure
+(run "3 4 +")
+;; [7]
 ```
 
 ## To Do
