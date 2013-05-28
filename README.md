@@ -6,10 +6,12 @@ It uses an ANTLR3 lexer and a Java Exception class as a form of longjmp to get o
 
 ## Sample Usage
 
-Sample file:
+Input file:
 
 ```
-$ cat src/main/resources/fact.ps 
+$ cat src/main/resources/fact.ps
+```
+```PostScript
 /factorial {
   dup 0 eq {
     pop 1
