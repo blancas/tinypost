@@ -33,3 +33,8 @@ Usage: ps <file>
     (:os (reduce postscript (make-env) (text-scanner ps)))
     (catch Throwable t
       (.println *err* (.getMessage t)))))
+
+
+(defn runf
+  "Runs the passed PostScript file. Returns the operand stack."
+  [file] (run (slurp file)))
