@@ -40,7 +40,7 @@ Use `runf` to run a ps file and get the resulting operand stack.
 ;; [3628800]
 ```
 
-Use `run` to run ps code and get the resulting operand stack.
+Use `run` to evaluate ps code and get the resulting operand stack.
 
 ```Clojure
 (run "3 4 +")
