@@ -230,7 +230,7 @@
 (def ne (binary not=))
 
 (defn neg
-  "dup (n --> -n) Reverses the sign of the number on the top of the stack."
+  "neg (n --> -n) Reverses the sign of the number on the top of the stack."
   [env]
   (let [s (:os env)]
     (assoc env :os (conj (pop s) (- (peek s))))))
@@ -328,59 +328,147 @@
             (fn [x y] (or (and x (not y)) (and (not x) y))))]
     (assoc env :os (conj (rdrop 2 s) (f op1 op2)))))
 
-;
-; System Dictionary
-;
+(defn abs
+  "abs (n --> n) Computes the absolute value of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/abs s)))))
+
+(defn ceiling
+  "ceiling (n --> n) Computes the ceiling of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/ceil s)))))
+
+(defn floor
+  "floor (n --> n) Computes the floor of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/floor s)))))
+
+(defn round
+  "round (n --> n) Rounds the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/round s)))))
+
+(defn truncate
+  "truncate (n --> n) Truncates the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (long s)))))
+
+(defn sqrt
+  "sqrt (n --> n) Computes the square root of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/sqrt s)))))
+
+(defn atan
+  "atan (n --> n) Computes the atan of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/atan s)))))
+
+(defn cos
+  "cos (n --> n) Computes the cos of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/cos s)))))
+
+(defn sin
+  "sin (n --> n) Computes the sin of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/sin s)))))
+
+(defn ln
+  "ln (n --> n) Computes the natural logarithm of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/log s)))))
+
+(defn log10
+  "log (n --> n) Computes the logarithm base 10 of the number on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (Math/log10 s)))))
+
+(defn ps-rand
+  "rand ( --> n) Puts a random integer on the TOS."
+  [env]
+  (let [s (:os env)]
+    (assoc env :os (conj (pop s) (long (* (rand) 1000000000))))))
+
+; exp (n e --> n^e) Computes n^e.
+(def exp (binary #(Math/pow %1 %2)))
+
+;;
+;; System Dictionary
+;;
 
 (def sys-dict (hash-map
                 ; language
-                "["       lbracket
-                "]"       rbracket
-                "aload"   aload
-                "get"     ps-get
-                "put"     ps-put
-                "length"  length
+                "["        lbracket
+                "]"        rbracket
+                "aload"    aload
+                "get"      ps-get
+                "put"      ps-put
+                "length"   length
                 ; stack
-                "="       ptos
-                "=="      ptos
-                "pstack"  pstack 
-                "clear"   clear 
-                "count"   ps-count
-                "dup"     dup 
-                "exch"    exch 
-                "pop"     ps-pop 
-                "roll"    roll
+                "="        ptos
+                "=="       ptos
+                "pstack"   pstack 
+                "clear"    clear 
+                "count"    ps-count
+                "dup"      dup 
+                "exch"     exch 
+                "pop"      ps-pop 
+                "roll"     roll
                 ; control
-                "eq"      eq
-                "ne"      ne
-                "ge"      ge
-                "gt"      gt
-                "le"      le
-                "lt"      lt
-                "and"     ps-and
-                "not"     ps-not
-                "or"      ps-or
-                "xor"     ps-xor
-                "true"    ps-true
-                "false"   ps-false
-                "if"      ps-if
-                "ifelse"  ifelse
-                "loop"    ps-loop
-                "repeat"  ps-repeat
-                "for"     ps-for
-                "forall"  forall
-                "exit"    exit
+                "eq"       eq
+                "ne"       ne
+                "ge"       ge
+                "gt"       gt
+                "le"       le
+                "lt"       lt
+                "and"      ps-and
+                "not"      ps-not
+                "or"       ps-or
+                "xor"      ps-xor
+                "true"     ps-true
+                "false"    ps-false
+                "if"       ps-if
+                "ifelse"   ifelse
+                "loop"     ps-loop
+                "repeat"   ps-repeat
+                "for"      ps-for
+                "forall"   forall
+                "exit"     exit
                 ; math
-                "add"     add 
-                "+"       add
-                "div"     div
-                "/"       div 
-                "idiv"    idiv 
-                "mod"     modulo 
-                "mul"     mul
-                "*"       mul
-                "neg"     neg
-                "sub"     sub
-                "-"       sub 
+                "add"      add 
+                "+"        add
+                "div"      div
+                "/"        div 
+                "idiv"     idiv 
+                "mod"      modulo 
+                "mul"      mul
+                "*"        mul
+                "neg"      neg
+                "sub"      sub
+                "-"        sub
+		"abs"      abs
+                "ceiling"  ceiling
+                "floor"    floor
+                "round"    round
+                "truncate" truncate
+                "sqrt"     sqrt
+                "atan"     atan
+                "cos"      cos
+                "sin"      sin
+                "exp"      exp
+                "ln"       ln
+                "log"      long
+                "rand"     ps-rand
                 ; dictionary
                 "def"     ps-def ))
