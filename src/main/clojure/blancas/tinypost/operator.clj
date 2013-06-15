@@ -65,7 +65,7 @@
   "abs (n --> n) Computes the absolute value of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/abs s)))))
+    (assoc env :os (conj (pop s) (Math/abs (peek s))))))
 
 ; add (n1 n2 --> n1+n2) Adds two numbers.
 (def add (binary +))
@@ -89,13 +89,13 @@
   "atan (n --> n) Computes the atan of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/atan s)))))
+    (assoc env :os (conj (pop s) (Math/atan (peek s))))))
 
 (defn ceiling
   "ceiling (n --> n) Computes the ceiling of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/ceil s)))))
+    (assoc env :os (conj (pop s) (Math/ceil (peek s))))))
 
 (defn clear
   "clear (obj1.. objn --> ) Removes all stack contents."
@@ -111,7 +111,7 @@
   "cos (n --> n) Computes the cos of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/cos s)))))
+    (assoc env :os (conj (pop s) (Math/cos (peek s))))))
 
 (defn ps-def
   "Binds a name to a procedure object or a function that
@@ -158,7 +158,7 @@
   "floor (n --> n) Computes the floor of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/floor s)))))
+    (assoc env :os (conj (pop s) (Math/floor (peek s))))))
 
 (defn ps-for
   "for (init inc limit proc -> ) Runs proc in a for loop."
@@ -244,13 +244,13 @@
   "ln (n --> n) Computes the natural logarithm of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/log s)))))
+    (assoc env :os (conj (pop s) (Math/log (peek s))))))
 
 (defn log10
   "log (n --> n) Computes the logarithm base 10 of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/log10 s)))))
+    (assoc env :os (conj (pop s) (Math/log10 (peek s))))))
 
 ; lt (v1 v2 --> v1<v2) Tests for less than.
 (def lt (binary <))
@@ -365,19 +365,19 @@
   "round (n --> n) Rounds the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/round s)))))
+    (assoc env :os (conj (pop s) (Math/round (peek s))))))
 
 (defn sin
   "sin (n --> n) Computes the sin of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/sin s)))))
+    (assoc env :os (conj (pop s) (Math/sin (peek s))))))
 
 (defn sqrt
   "sqrt (n --> n) Computes the square root of the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (Math/sqrt s)))))
+    (assoc env :os (conj (pop s) (Math/sqrt (peek s))))))
 
 ; sub (n1 n2 --> n1-n2) Subtracts two numbers.
 (def sub (binary -))
@@ -391,7 +391,7 @@
   "truncate (n --> n) Truncates the number on the TOS."
   [env]
   (let [s (:os env)]
-    (assoc env :os (conj (pop s) (long s)))))
+    (assoc env :os (conj (pop s) (long (peek s))))))
 
 (defn ps-xor
   "xor (op1 op1 --> (op1 xor op2)) XORs two numbers or booleans."

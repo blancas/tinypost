@@ -11,8 +11,14 @@
 	[blancas.tinypost main operator]
 	[midje.sweet :exclude (expect one-of)]))
 
-
 (deftest test-0000
+  (fact "abs -- absolute value"
+	(run "99 abs") => [99]
+	(run "-99 abs") => [99]
+        (run "-3.1416 abs") => [3.1416]
+        (run "3.1416 abs") => [3.1416]))
+
+(deftest test-0020
   (fact "add -- adds any two numbers"
 	(run "3 4 add") => [7]
 	(run "3.5 4.5 add") => [8.0]
