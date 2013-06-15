@@ -14,4 +14,6 @@
 
 (deftest test-0000
   (fact "add -- adds any two numbers"
-	(run "3 4 add") => [7]))
+	(run "3 4 add") => [7]
+	(run "3.5 4.5 add") => [8.0]
+	(run "5 10 15 20 add add add") => [50]))
