@@ -136,3 +136,85 @@
 	(run "true { 777 } if") => [777]
 	(run "-1 99 100 ge { 747 } if") => [-1]))
 
+(deftest test-0460
+  (fact "ifelse -- conditional execution"
+	(run "true { 777 } { 787 } ifelse") => [777]
+	(run "-1 99 100 ge { 747 } { 787 } ifelse") => [-1 787]
+	(run "false { (foobar) } { true { (barbaz) } if } ifelse") => ["(barbaz)"]))
+
+(deftest test-0480
+  (fact "le -- less than or equal"
+	(run "100 99 le 100 100 le 99 100 le") => [false true true]
+	(run "0 0 1 add le") => [true]
+	(run "0 0 0 add le") => [true]
+	(run "0 0 1 sub le") => [false]))
+
+(deftest test-0500
+  (let [ps1 "[ 1 2 3 4 5 6 7 8 ] length"
+	ps2 "/arr [ 2 4 6 8 ] def arr length"]
+    (fact "length -- puts the length of an array on the TOS"
+	  (run ps1) => [8]
+	  (run ps2) => [4])))
+
+(deftest test-0520
+  (fact "ln"
+	(run "45 ln") => [3.8066624897703196]
+	(run "0.5 ln") => [-0.6931471805599453]))
+
+(deftest test-0540
+  (fact "log"
+	(run "45 log") => [1.6532125137753437]
+	(run "0.5 log") => [-0.3010299956639812]))
+
+(deftest test-0560
+  (fact "lt -- less than"
+	(run "100 99 lt 100 100 lt 99 100 lt") => [false false true]
+	(run "0 0 1 add lt") => [true]
+	(run "0 0 0 add lt") => [false]
+	(run "0 0 1 sub lt") => [false]))
+
+;; 580 loop
+
+(deftest test-0600
+  (fact "mod -- computes the modulo of two integers"
+	(run "10 2 mod") => [0]
+	(run "4 3 mod") => [1]
+	(run "3 4 mod") => [3]))
+
+(deftest test-0620
+  (fact "mul -- multiplies any two numbers"
+	(run "3 4 mul") => [12]
+	(run "3.0 4 mul") => [12.0]
+	(run "3.5 4.5 mul") => [15.75]
+	(run "5 10 15 20 mul mul mul") => [15000]))
+
+(deftest test-0640
+  (fact "ne -- tests for inequality"
+	(run "(A380) (A380) ne") => [false]
+	(run "737 757 ne") => [true]
+	(run "3.14159 3.14159 ne") => [false]
+	(run "true false ne") => [true]))
+
+(deftest test-0660
+  (fact "neg -- changes the sign of the TOS"
+	(run "99 neg") => [-99]
+	(run "-99 abs neg") => [-99]
+        (run "-3.1416 neg") => [3.1416]))
+
+(deftest test-0680
+  (fact "not -- logical not"
+	(run "100 99 lt not 100 100 lt not 99 100 lt not") => [true true false]
+	(run "0 0 1 add lt not") => [false]
+	(run "0 0 0 add lt not") => [true]
+	(run "0 0 1 sub lt not") => [true]))
+
+(deftest test-0700
+  (let [ps "/x true def /y false def x x or x y or y x or y y or"]
+    (fact "or -- logical OR"
+	  (run ps) => [true true true false])))
+
+(deftest test-0720
+  (fact "pop -- removes the TOS"
+	(run "1 2 (foobar) pop") => [1 2]
+	(run "(foobar) pop") => []
+	(run "1 2 (foobar) pop pop pop") => []))

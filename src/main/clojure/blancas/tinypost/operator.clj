@@ -468,7 +468,7 @@
                 "sin"      sin
                 "exp"      exp
                 "ln"       ln
-                "log"      long
+                "log"      log10
                 "rand"     ps-rand
                 ; dictionary
                 "def"     ps-def ))
