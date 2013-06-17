@@ -84,3 +84,55 @@
 	(run "(A380) (A380) eq") => [true]
 	(run "737 757 eq") => [false]
 	(run "3.14159 3.14159 eq") => [true]))
+
+(deftest test-0260
+  (fact "exch -- switches the TOS and the next element"
+	(run "10 2 exch div") => [0.2]
+	(run "12.9 3.0 exch sub") => [-9.9]
+	(run "200 2 10 exch div div") => [40.0]
+	(run "3 4 exch sub") => [1]))
+
+;; 0280 exit
+
+(deftest test-0300
+  (fact "exp"
+	(run "2 3 exp") => [8.0]
+	(run "2 8 exp") => [256.0]
+	(run "-2 3 exp") => [-8.0]
+	(run "2 -3 exp") => [0.125]))
+
+(deftest test-0320
+  (fact "floor"
+	(run "3.98 floor") => [3.0]
+	(run "-3.98 floor") => [-4.0]))
+
+;; 0340 for
+
+;; 0360 forall
+
+(deftest test-0380
+  (fact "true, false"
+	(run "true false") => [true false]
+	(run "true false and") => [false]
+	(run "true true and") => [true]
+	(run "false true or") => [true]
+	(run "false false or") => [false]))
+
+(deftest test-0400
+  (fact "ge -- greater than or equal"
+	(run "100 99 ge 100 100 ge 99 100 ge") => [true true false]
+	(run "0 0 1 add ge") => [false]
+	(run "0 0 0 add ge") => [true]
+	(run "0 0 1 sub ge") => [true]))
+
+(deftest test-0420
+  (fact "idiv -- divides two integers"
+	(run "10 2 idiv") => [5]
+	(run "4 3 idiv") => [1]
+	(run " 3 4 idiv") => [0]))
+
+(deftest test-0440
+  (fact "if -- conditional execution"
+	(run "true { 777 } if") => [777]
+	(run "-1 99 100 ge { 747 } if") => [-1]))
+
