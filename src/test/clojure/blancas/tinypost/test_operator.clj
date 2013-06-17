@@ -48,3 +48,39 @@
   (fact "clear"
 	(run "1 2 3 4 5 6 clear") => []
 	(run "5 5 add 5 5 5 add clear") => []))
+
+
+(deftest test-0140
+  (fact "count"
+	(run "1 2 3 4 5 count") => [1 2 3 4 5 5]
+	(run "5 5 add 5 5 5 add add add count") => [25 1]
+	(run "1 2 3 pop pop pop count") => [0]))
+
+(deftest test-0160
+  (fact "cos"
+	(run "45 cos") => [0.5253219888177297]
+	(run "-1 cos") => [0.5403023058681398]))
+
+(deftest test-0180
+  (let [ps "/x 99 def /y -1 def /z (foobar) def x y z count"]
+    (fact "def -- define a value"
+	  (run ps) => [99 -1 "(foobar)" 3])))
+
+(deftest test-0200
+  (fact "div -- divides any two numbers"
+	(run "10 2 div") => [5.0]
+	(run "12.9 3.0 div") => [4.3]
+	(run "200 10 2 div div") => [40.0]
+	(run "3 4 div") => [0.75]))
+
+(deftest test-0220
+  (fact "dup -- duplicates the TOS"
+	(run "747 dup") => [747 747]
+	(run "(foo) dup") => ["(foo)" "(foo)"]
+	(run "5 dup 10 mul mul") => [250]))
+
+(deftest test-0240
+  (fact "eq -- tests for equality"
+	(run "(A380) (A380) eq") => [true]
+	(run "737 757 eq") => [false]
+	(run "3.14159 3.14159 eq") => [true]))
