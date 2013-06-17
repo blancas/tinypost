@@ -218,3 +218,51 @@
 	(run "1 2 (foobar) pop") => [1 2]
 	(run "(foobar) pop") => []
 	(run "1 2 (foobar) pop pop pop") => []))
+
+(deftest test-0740
+  (fact "put -- sets an array element"
+	(run "/arr [0 0 0] def arr 1 747 put arr aload pop") => [0 747 0]))
+
+;; 760 repeat
+
+(deftest test-0780
+  (fact "roll -- rotates n top elements in the stack to the right"
+	(run "1 2 3 4 5 5 3 roll") => [4 5 1 2 3]))
+
+
+;; 800 roll left
+
+(deftest test-0820
+  (fact "round -- rounds the TOS"
+	(run "25.55 round") => [26]
+	(run "-11.11 round") => [-11]))
+
+(deftest test-0840
+  (fact "sin"
+	(run "45 sin") => [0.8509035245341184]
+	(run "-1 sin") => [-0.8414709848078965]))
+
+(deftest test-0860
+  (fact "sqrt"
+	(run "81 sqrt") => [9.0]
+	(run "10000.0 sqrt") => [100.0]
+	(run "40 sqrt") => [6.324555320336759]))
+
+(deftest test-0880
+  (fact "sub -- subtraction"
+	(run "3 4 sub") => [-1]
+	(run "4 3 sub") => [1]
+	(run "5.58 4.5 sub") => [1.08]
+	(run "20 15 10 5 sub sub sub") => [10]))
+
+(deftest test-0900
+  (fact "truncate"
+	(run "81 truncate") => [81]
+	(run "81.0 truncate") => [81]
+	(run "10.37485 truncate") => [10]
+	(run "-40.98755 truncate") => [-40]))
+
+(deftest test-0920
+  (let [ps "/x true def /y false def x x xor x y xor y x xor y y xor"]
+    (fact "or -- logical OR"
+	  (run ps) => [false true true false])))
